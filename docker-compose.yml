@@ -1,0 +1,34 @@
+version: "3.4"
+x-environment: &CASHMIR_ENVIRONMENT
+  PLAID_CLIENT_ID: ${PLAID_CLIENT_ID}
+  PLAID_SECRET: ${PLAID_SECRET}
+  PLAID_PRODUCTS: ${PLAID_PRODUCTS}
+  PLAID_COUNTRY_CODES: ${PLAID_COUNTRY_CODES}
+  PLAID_REDIRECT_URI: ${PLAID_REDIRECT_URI}
+  PLAID_ENV: ${PLAID_ENV}
+  DB_CONNECTION: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+services:
+  app:
+    build:
+      context: .
+    depends_on: 
+      - postgres
+    volumes:
+      - ./app/views/:/cashmir/views/
+    ports: 
+      - 8000:8000
+    environment:
+      << : *CASHMIR_ENVIRONMENT
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+volumes:
+  postgres:

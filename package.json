@@ -1,0 +1,31 @@
+{
+  "name": "cashmir",
+  "version": "1.0.0-beta",
+  "description": "Open source personal budgeting tool",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirandalibi/cashmir.git"
+  },
+  "keywords": [
+    "budgeting",
+    "fintech",
+    "banking"
+  ],
+  "author": "Amir Andalibi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amirandalibi/cashmir/issues"
+  },
+  "homepage": "https://cashmir.app",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "plaid": "^8.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
