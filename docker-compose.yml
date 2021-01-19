@@ -6,6 +6,7 @@ x-environment: &CASHMIR_ENVIRONMENT
   PLAID_COUNTRY_CODES: ${PLAID_COUNTRY_CODES}
   PLAID_REDIRECT_URI: ${PLAID_REDIRECT_URI}
   PLAID_ENV: ${PLAID_ENV}
+  SESSION_SECRET: ${SESSION_SECRET}
   DB_CONNECTION: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
 services:
   app:
@@ -14,7 +15,7 @@ services:
     depends_on: 
       - postgres
     volumes:
-      - ./app/views/:/cashmir/views/
+      - ./app/:/cashmir/
     ports: 
       - 8000:8000
     environment:

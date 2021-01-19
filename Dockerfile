@@ -7,8 +7,6 @@ COPY --chown=node:node ./package*.json ./
 USER node
 RUN npm install
 
-COPY --chown=node:node ./app/index.js ./
-
 EXPOSE 8000
 ENTRYPOINT []
 CMD ["npx", "nodemon", "index.js"]

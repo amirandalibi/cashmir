@@ -21,7 +21,10 @@
   },
   "homepage": "https://cashmir.app",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^6.2.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "pg": "^8.5.1",
     "plaid": "^8.1.3"
   },
