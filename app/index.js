@@ -10,13 +10,14 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const registerRouter = require('./routes/register');
+const dashboardRouter = require('./routes/dashboard');
 const dbPool = require('./database');
 const APP_PORT = process.env.APP_PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // set static files folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 app.use(session({
   store: new pgSession({
@@ -32,10 +33,11 @@ app.use(session({
 
 // routes
 app.use('/', indexRouter);
+app.use('/dashboard', dashboardRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter)
 app.use('/register', registerRouter);
 
-app.listen(APP_PORT, function () {
+app.listen(APP_PORT, () => {
   console.log('👛 server listening on port ' + APP_PORT);
 });
