@@ -3,3 +3,6 @@ node_modules
 .DS_Store
 .cache
 dist
+app/views/*.*.css*
+app/views/*main.*.js*
+app/views/*.html
