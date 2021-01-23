@@ -1,0 +1,28 @@
+form {
+  max-width: 20em;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  margin: 4px 0;
+}
+
+.button_wrapper {
+  margin-top: 1em;
+}
+
+button {
+  width: 150px;
+  height: 40px;
+  background-color:white;
+  outline: none;
+  border: 1px solid #ccc;
+  box-shadow: none;
+}
+
+main {
+  padding: 20px 20px 20px 22em;
+}

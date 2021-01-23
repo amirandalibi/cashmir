@@ -13,12 +13,13 @@ const bcrypt = require('bcryptjs');
 function createUser(first, last, email, password) {
   const query = {
     text:`
-    INSERT INTO users(user_firstname, user_lastname, user_email, user_password, user_role)
+    INSERT INTO users("firstName", "lastName", "email", "password", "role")
     VALUES($1, $2, $3, $4, $5)
-    RETURNING user_firstname, user_lastname, user_email
+    RETURNING "firstName", "lastName", "email"
     `,
     values: [first, last, email, password, 'user'],
   };
+
   return db.query(query);
 }
 
@@ -41,9 +42,10 @@ function updateSession(sessionId, userId, lastActivity, userAgent, ipAddress) {
   const query = {
     text:`
        UPDATE "user_sessions"
-        SET user_id = $1,
-       	user_data = $3
-       WHERE (sid = $2);
+        SET "userId" = $1,
+       	"userData" = $3
+       WHERE (sid = $2)
+       RETURNING "userId";
     `,
     values: [userId, sessionId, userData],
   };
@@ -60,7 +62,7 @@ function lookupEmail(email) {
   const query = {
     text: `
     SELECT * FROM users
-    WHERE user_email = $1
+    WHERE "email" = $1
     `,
     values: [email],
   }
@@ -103,28 +105,24 @@ function verifyPassword(plainPassword, passwordHash) {
 }
 
 /**
- * Save current session into database
+ * Saves current session into database
  * @param {object} request
- * @param {object} user
- * @returns {Promise}
  */
-function saveSession(request, user) {
+function saveSession(request) {
   return request.session.save((err) => {
-    if (!err) {
-       return updateSession(
-        request.sessionID,
-        user.user_id,
-        new Date(),
-        request.headers['user-agent'],
-        request.ip
-      )
-    }
+    if (err) console.log(err);
   })
 }
 
+/**
+ * Checks to see if current session is logged in
+ * @param {object} request
+ * @returns {boolean}
+ */
 function loggedIn(request) {
   return request.session && request.session.loggedIn;
 }
+
 module.exports = {
   createUser,
   generatePasswordHash,
